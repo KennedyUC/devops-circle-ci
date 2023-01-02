@@ -23,6 +23,8 @@ jobs:
     docker: 
       - image: ubuntu:latest
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: 'save hello world output'
           command: |
