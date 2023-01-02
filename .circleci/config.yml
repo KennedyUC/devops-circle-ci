@@ -23,7 +23,7 @@ jobs:
     docker: 
       - image: ubuntu:latest
     steps:
-      - run: mkdir -p folder
+      - run: mkdir folder
       - run:
           name: 'save hello world output'
           command: |
