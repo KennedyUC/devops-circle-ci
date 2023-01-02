@@ -32,7 +32,7 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths: 
-            - output.txt
+            - /tmp/workspace/output.txt
   print_output_file:
     docker: 
       - image: ubuntu:latest
