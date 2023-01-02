@@ -10,6 +10,15 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
+  print_env:
+    docker:
+      - image: ubuntu:latest
+    steps:
+      - checkout
+      - run:
+          name: 'print environment environment'
+          command: |
+            echo $ENV_VAR
 workflows:
   welcome:
     jobs:
@@ -17,3 +26,5 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_env:
+          requires: [print_env]
