@@ -43,7 +43,7 @@ jobs:
       - run:
           name: 'print saved hello world output'
           command: |
-            cat output.txt
+            cat /tmp/workspace/output.txt
 
 workflows:
   welcome:
