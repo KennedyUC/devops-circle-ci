@@ -16,9 +16,32 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'print environment environment'
+          name: 'print environment variable'
           command: |
             echo $ENV_VAR
+  save_hello_world_output:
+    docker: 
+      - image: ubuntu:latest
+    steps:
+      - run:
+          name: 'save hello world output'
+          command: |
+            echo "text to output here" > /tmp/workspace/output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths: 
+            - output.txt
+  print_output_file:
+    docker: 
+      - image: ubuntu:latest
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: 'print saved hello world output'
+          command: |
+            cat output.txt
+
 workflows:
   welcome:
     jobs:
@@ -28,3 +51,9 @@ workflows:
             - print_hello
       - print_env:
           requires: [print_world]
+      - save_hello_world_output:
+          requires:
+            - print_env
+      - print_output_file:
+          requires:
+            - save_hello_world_output
