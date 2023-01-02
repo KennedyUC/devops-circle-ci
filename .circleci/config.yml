@@ -23,16 +23,16 @@ jobs:
     docker: 
       - image: ubuntu:latest
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
+      # - attach_workspace:
+      #     at: /tmp/workspace
       - run:
           name: 'save hello world output'
           command: |
-            echo "text to output here" > /tmp/workspace/output.txt
+            echo "text to output here" > workspace/output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: workspace
           paths: 
-            - /tmp/workspace/output.txt
+            - output.txt
   print_output_file:
     docker: 
       - image: ubuntu:latest
