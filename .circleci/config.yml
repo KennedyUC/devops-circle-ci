@@ -23,13 +23,12 @@ jobs:
     docker: 
       - image: ubuntu:latest
     steps:
-      - run: mkdir folder
       - run:
           name: 'save hello world output'
           command: |
-            echo "text to output here" > folder/output.txt
+            echo "text to output here" > ~/output.txt
       - persist_to_workspace:
-          root: folder
+          root: ~/
           paths: 
             - output.txt
   print_output_file:
@@ -37,11 +36,11 @@ jobs:
       - image: ubuntu:latest
     steps:
       - attach_workspace:
-          at: /tmp/output
+          at: ~/
       - run:
           name: 'print saved hello world output'
           command: |
-            cat /tmp/output/output.txt
+            cat ~/output.txt
 
 workflows:
   welcome:
